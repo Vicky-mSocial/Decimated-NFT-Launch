@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decimated - NFT Launch</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="https://decimated.net/images/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://decimated.net/images/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://decimated.net/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://decimated.net/images/favicons/favicon-16x16.png">
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){
+            w[l]=w[l]||[];
+            w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window,document,'script','dataLayer','GTM-P3762MPN');
+    </script>
+    
+    <!-- End Google Tag Manager -->
   
     <style>
         body, html {
@@ -33,13 +48,13 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            transform:translateX(-50%) translateY(-50%) scale(90%);
+            transform:translateX(-50%) translateY(-50%);
             z-index: 1;
             width:90%;
             max-width:850px;
             height:850px;
             max-height:90%;
-            border:10px solid red;
+            /* border:10px solid red; */
         }
         .logo, .button {
             position: absolute;
@@ -52,7 +67,7 @@
             top: 0%;
         }
         .button {
-            bottom: 20px;
+            bottom: 5%;
             cursor:pointer;
         }
         .logo img{
@@ -98,6 +113,12 @@
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3762MPN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <div class="bg-desktop"></div>
     <div class="bg-mobile"></div>
     <div class="content">
@@ -124,14 +145,10 @@
 
             desktopBg.onload = function() {
                 desktopBgElement.style.backgroundImage = 'url(' + desktopBg.src + ')';
-                desktopBgElement.style.display = 'block';
-                mobileBgElement.style.display = 'none';
             };
 
             mobileBg.onload = function() {
                 mobileBgElement.style.backgroundImage = 'url(' + mobileBg.src + ')';
-                mobileBgElement.style.display = 'block';
-                desktopBgElement.style.display = 'none';
             };
 
             function updateBackground() {
@@ -143,16 +160,21 @@
 
                 
                 var contentElement = document.querySelector('.content');
+
+                contentElement.style.width = '100%';
+                contentElement.style.height = '100%';
+
                 var aspectRatio = 850/800;
+
                 var width = contentElement.offsetWidth;
                 var height = width / aspectRatio;
                 contentElement.style.height = height + 'px';
-                
-                if (aspectRatio < (contentElement.offsetWidth/contentElement.offsetHeight))
+
+                if (contentElement.offsetHeight < height)
                 {
-                    var height = contentElement.offsetHeight;
-                    var width = height * aspectRatio;
-                    contentElement.style.width = width + 'px';
+                    var h = contentElement.offsetHeight;
+                    var w = h * aspectRatio;
+                    contentElement.style.width = w + 'px';
                 }
             }
 
