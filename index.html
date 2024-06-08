@@ -1,8 +1,165 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decimated - NFT Launch</title>
-  </head>
-  <body>
-    <div>Test Page</div>
-  </body>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://decimated.net/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://decimated.net/images/favicons/favicon-16x16.png">
+  
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .bg-desktop, .bg-mobile {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: none; /* Hide until fully loaded */
+        }
+        .content
+        {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform:translateX(-50%) translateY(-50%) scale(90%);
+            z-index: 1;
+            width:90%;
+            max-width:850px;
+            height:850px;
+            max-height:90%;
+            border:10px solid red;
+        }
+        .logo, .button {
+            position: absolute;
+            width:100%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .logo {
+            top: 0%;
+        }
+        .button {
+            bottom: 20px;
+            cursor:pointer;
+        }
+        .logo img{
+            position: relative;
+            width:70%;
+            height:auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .button img{
+            position: relative;
+            width:70%;
+            height:auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .button:hover {
+            filter:saturate(5);
+            /* max-width:50%;
+            max-height: 20%; */
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Media Queries for Aspect Ratio */
+        @media (max-aspect-ratio: 1/1) {
+            .bg-desktop {
+                display: none;
+            }
+            .bg-mobile {
+                display: block;
+            }
+        }
+        @media (min-aspect-ratio: 1/1) {
+            .bg-desktop {
+                display: block;
+            }
+            .bg-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-desktop"></div>
+    <div class="bg-mobile"></div>
+    <div class="content">
+        <div class="logo">
+            <img src="logoAndExtras.png" alt="Logo">
+        </div>
+        <a href="https://discord.gg/decimated">
+            <div class="button">
+                <img src="joinDiscord.png" alt="Join Discord">
+            </div>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var desktopBg = new Image();
+            var mobileBg = new Image();
+            
+            desktopBg.src = 'desktopBG.jpg';
+            mobileBg.src = 'mobileBG.jpg';
+
+            var desktopBgElement = document.querySelector('.bg-desktop');
+            var mobileBgElement = document.querySelector('.bg-mobile');
+
+            desktopBg.onload = function() {
+                desktopBgElement.style.backgroundImage = 'url(' + desktopBg.src + ')';
+                desktopBgElement.style.display = 'block';
+                mobileBgElement.style.display = 'none';
+            };
+
+            mobileBg.onload = function() {
+                mobileBgElement.style.backgroundImage = 'url(' + mobileBg.src + ')';
+                mobileBgElement.style.display = 'block';
+                desktopBgElement.style.display = 'none';
+            };
+
+            function updateBackground() {
+                if (window.innerWidth > window.innerHeight) {
+                    desktopBg.src = 'desktopBG.jpg';
+                } else {
+                    mobileBg.src = 'mobileBG.jpg';
+                }
+
+                
+                var contentElement = document.querySelector('.content');
+                var aspectRatio = 850/800;
+                var width = contentElement.offsetWidth;
+                var height = width / aspectRatio;
+                contentElement.style.height = height + 'px';
+                
+                if (aspectRatio < (contentElement.offsetWidth/contentElement.offsetHeight))
+                {
+                    var height = contentElement.offsetHeight;
+                    var width = height * aspectRatio;
+                    contentElement.style.width = width + 'px';
+                }
+            }
+
+            updateBackground();
+            window.addEventListener('resize', updateBackground);
+        });
+
+    </script>
+</body>
 </html>
